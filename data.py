@@ -342,3 +342,21 @@ class VGGFaceDAGANDataset(DAGANDataset):
 
         return x_train, x_test, x_val
 
+
+
+class PlantVillageDatasetDAGANDataset(DAGANImbalancedDataset):
+    def __init__(self, batch_size, last_training_class_index, reverse_channels, num_of_gpus, gen_batches):
+        super(PlantVillageDatasetDAGANDataset, self).__init__(batch_size, last_training_class_index, reverse_channels,
+                                                             num_of_gpus, gen_batches)
+    def load_dataset(self, last_training_class_index):
+        x = np.load("datasets/data.npy")
+        x_temp = []
+        for i in range(x.shape[0]):
+            choose_samples = np.random.choice([i for i in range(1, 15)])
+            x_temp.append(x[i, :choose_samples])
+        self.x = np.array(x_temp)
+        self.x = self.x / np.max(self.x)
+        x_train, x_test, x_val = self.x[:1200], self.x[1200:1600], self.x[1600:]
+        x_train = x_train[:last_training_class_index]
+
+        return x_train, x_test, x_val

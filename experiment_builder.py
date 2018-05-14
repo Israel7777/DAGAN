@@ -38,9 +38,9 @@ class ExperimentBuilder(object):
         image_width = data.image_width
         image_channel = data.image_channel
         # print(self.batch_size, image_height.shape, image_width.shape,image_channel.shape)
-        self.input_x_i = tf.placeholder( [self.num_gpus, self.batch_size, image_height, image_width,
+        self.input_x_i = tf.placeholder(tf.float32, [self.num_gpus, self.batch_size, image_height, image_width,
                                                      image_channel], 'inputs-1')
-        self.input_x_j = tf.placeholder([self.num_gpus, self.batch_size, image_height, image_width,
+        self.input_x_j = tf.placeholder(tf.float32, [self.num_gpus, self.batch_size, image_height, image_width,
                                                      image_channel], 'inputs-2-same-class')
 
         self.z_input = tf.placeholder(tf.float32, [self.batch_size, self.z_dim], 'z-input')

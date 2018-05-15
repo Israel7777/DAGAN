@@ -1,5 +1,8 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
+
+from datasets import Dataset
+
 np.random.seed(2591)
 
 
@@ -349,7 +352,6 @@ class PlantDAGANDataset(DAGANDataset):
                                                   gen_batches)
 
     def load_dataset(self, gan_training_index):
-
         self.x = np.load("datasets/data.npy")
         self.x = self.x / np.max(self.x)
         # self.x = np.reshape(self.x, newshape=(2354, 100, 64, 64, 3))

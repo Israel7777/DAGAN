@@ -355,3 +355,5 @@ class PlantDAGANDataset(DAGANDataset):
         # self.x = np.reshape(self.x, newshape=(2354, 100, 64, 64, 3))
         x_train, x_test, x_val = self.x[:2100], self.x[2100:2700], self.x[2700:]
         x_train = x_train[:gan_training_index]
+
+        return x_train, x_test, x_val
